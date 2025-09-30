@@ -7,21 +7,20 @@ class book:
         self.title = title
         self.author = author
 
-# b1 = book('Fluent Python', 'Luciano Ramalho', '978-1492056355')
-
 class member:
     def __init__(self, firstname: str, lastname: str, dob: str, email: str):
         self.firstname = firstname
         self.lastname = lastname
         self.dob = dob
         self.email = email
+    
+    def register_member(self):
+        if not member_db.get(self.firstname):
+            member_db[self.firstname] = {'firstname':self.firstname, 'lastname':self.lastname, 'dob':self.dob, 'email':self.email}
 
-    def donate_book(self, title, author, isbn):
-        if not books_db.get(title): # figure out a way to add a nested struct containing the book information to books_db
-            books_db['title'] = title
-            books_db['author'] = author
-            books_db['isbn'] = isbn
-            books_db['is_available'] = 'Yes'
+    def donate_book(self):
+        if not books_db.get(self.title): # figure out a way to add a nested struct containing the book information to books_db
+            books_db[self.title] = {'author':self.author, 'isbn':self.isbn, 'is_available':'y'}
         else:
             pass
 
@@ -30,16 +29,11 @@ class member:
 
 
 m1 = member('Varun', 'Athithiya', '02041994', 'shenbagarajvarun@gmail.com')
-m1.donate_book('abc', 'varun', '123456789')
-m1.donate_book('Fluent Python', 'Luciano Ramalho', '978-1492056355')
-
-
-print(books_db)
-
-# class borrower(member):
-#     def __init__(self, firstname, lastname, dob, email):
-#         super().__init__(firstname, lastname, dob, email)
-
-# class lender(member):
-#     def __init__(self, firstname, lastname, dob, email):
-#         super().__init__(firstname, lastname, dob, email)
+# m1.donate_book('abc', 'varun', '123456789')
+# m1.donate_book('Fluent Python', 'Luciano Ramalho', '978-1492056355')
+# m1.donate_book('Data Mining', 'Jiawei Han and Micheline Kamber', '978-8131205358')
+m2 = member('Kirtana', 'Shenbagaraj', '31122001', 'kirtanasraj@gmail.com')
+m2.register_member()
+m1.register_member()
+# print(books_db)
+print(member_db.items())
