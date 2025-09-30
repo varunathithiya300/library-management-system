@@ -2,6 +2,7 @@
 1. Book database (locally stored as a csv or as a python dic in-memory)
 2. Borrowers (student, non-student)
 3. Lenders (no classification)
+4. A member can be a borrower and a borrower can be a member
 
 #### Classes required - member (borrower, lender), book, rules
 #### Methods - lend, borrow
