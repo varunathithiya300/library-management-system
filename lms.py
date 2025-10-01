@@ -24,16 +24,19 @@ class member:
         else:
             pass
 
-    def borrow_book(self, title, author, isbn):
+    def borrow_book(self, book_title):
         """ 
-        whenever a members borrows a book, the is_available flag must be changed to 'N'
-        We should also maintain a mapping of which book is with which member
-        
         Approach
         Ideally we should be able to borrow a book based on any of the title or author or both
         This method should access the books_db and check the is_available flag for each book and return a suitable response.
-        If the book is available the book should be assigned to the user, else the system should show the date earliest and the latest available date of the book
+        If the book is available the book should be assigned to the user, else the system should show the date earliest and the latest available date of the book.
+        Whenever a book is borrowed, is_available = 'N'
+        We should also maintain a mapping of which book is with which member
         """
+        if books_db.get(book_title)['is_available'] == 'y':
+            books_db.get(book_title).update(is_available = 'n')
+        else:
+            print(f'{book_title} is not available at the moment.')
         
 
 m1 = member('Varun', 'Athithiya', '02041994', 'shenbagarajvarun@gmail.com')
@@ -46,8 +49,13 @@ m1.donate_book('abc', 'varun', '123456789')
 m1.donate_book('Fluent Python', 'Luciano Ramalho', '978-1492056355')
 m1.donate_book('Data Mining', 'Jiawei Han and Micheline Kamber', '978-8131205358')
 
-for k,v  in books_db.items():
-    print(k, v)
+# for k,v  in books_db.items():
+#     print(k, v)
 
-for k,v  in member_db.items():
-    print(k, v)
+# for k,v  in member_db.items():
+#     print(k, v)
+
+
+m1.borrow_book('Fluent Python')
+m2.borrow_book('Fluent Python')
+
