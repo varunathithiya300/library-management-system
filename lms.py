@@ -28,9 +28,13 @@ class member:
         """ 
         whenever a members borrows a book, the is_available flag must be changed to 'N'
         We should also maintain a mapping of which book is with which member
+        
+        Approach
+        Ideally we should be able to borrow a book based on any of the title or author or both
+        This method should access the books_db and check the is_available flag for each book and return a suitable response.
+        If the book is available the book should be assigned to the user, else the system should show the date earliest and the latest available date of the book
         """
-        pass
-
+        
 
 m1 = member('Varun', 'Athithiya', '02041994', 'shenbagarajvarun@gmail.com')
 m1.register_member()
