@@ -11,9 +11,10 @@ class book:
         self.isbn = isbn
         self.title = title
         self.author = author
+        self.donated_date = datetime.now().strftime("%Y-%m-$d")
 
 class member:
-    def __init__(self, firstname: str, lastname: str, dob: str, email: str, doj=None):
+    def __init__(self, firstname: str, lastname: str, dob: str, email: str):
         self.firstname = firstname
         self.lastname = lastname
         self.dob = dob
@@ -26,10 +27,10 @@ class member:
             member_db[self.firstname] = {'firstname':self.firstname, 'lastname':self.lastname, 'dob':self.dob, 'email':self.email, 'doj': self.doj, 'dor': self.dor}
 
     def donate_book(self, title, author, isbn):
-        if not books_db.get(title): # figure out a way to add a nested struct containing the book information to books_db
-            books_db[title] = {'author':author, 'isbn':isbn, 'is_available':'y'}
-        else:
+        if books_db.get(title): # figure out a way to add a nested struct containing the book information to books_db
             pass
+        else:
+            books_db[title] = {'author':author, 'isbn':isbn, 'is_available':'y'}
 
     def borrow_book(self, book_title):
         """ 
@@ -66,16 +67,9 @@ m1.donate_book('abc', 'varun', '123456789')
 m1.donate_book('Fluent Python', 'Luciano Ramalho', '978-1492056355')
 m1.donate_book('Data Mining', 'Jiawei Han and Micheline Kamber', '978-8131205358')
 
-# for k,v  in books_db.items():
-#     print(k, v)
-
-# for k,v  in member_db.items():
-#     print(k, v)
-
-
 m1.borrow_book('Fluent Python')
 m2.borrow_book('Fluent Python')
 m2.borrow_book('Data Mining')
 m1.borrow_book('Data Mining')
-# print(books_db)
-print(member_db)
+print(books_db)
+# print(member_db)
